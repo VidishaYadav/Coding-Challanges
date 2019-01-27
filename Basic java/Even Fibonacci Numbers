@@ -1,0 +1,27 @@
+
+public class Solution {
+	public static int evenFibSum(int n){
+		
+		/*Your class should be named Solution. 
+		*Don't write main().
+	 	*Don't take input, it is passed as function argument.
+	 	*Don't print output.
+	 	*Taking input and printing output is handled automatically.
+		*/ 
+      int sum=0;
+      int a[]=new int[n];
+       a[0]=0;
+      a[1]=1;
+      int i=2;
+	while((a[i-1]+a[i-2])<=n)
+    {
+     a[i]=a[i-1]+a[i-2];
+      if(a[i] % 2 == 0)
+      {
+        sum += a[i];
+      }
+      i++;
+    }
+      return sum;
+	}
+}
