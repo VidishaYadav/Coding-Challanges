@@ -1,0 +1,143 @@
+
+/* Signature of four required functions is given in the code. You can create other functions as well if you need.
+*  Also you should submit your code even if you are not done with all the functions. 
+*/
+
+// Main used internally is shown here just for your reference.
+/*public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		int n = s.nextInt();
+		int degree1[] = new int[n];
+		for(int i = 0; i < n; i++){
+			degree1[i] = s.nextInt();
+		}
+		int coeff1[] = new int[n];
+		for(int i = 0; i < n; i++){
+			coeff1[i] = s.nextInt();
+		}
+		Polynomial first = new Polynomial();
+		for(int i = 0; i < n; i++){
+			first.setCoefficient(degree1[i],coeff1[i]);
+		}
+		n = s.nextInt();
+		int degree2[] = new int[n];
+		for(int i = 0; i < n; i++){
+			degree2[i] = s.nextInt();
+		}
+		 int coeff2[] = new int[n];
+		for(int i = 0; i < n; i++){
+			coeff2[i] = s.nextInt();
+		}
+		Polynomial second = new Polynomial();
+		for(int i = 0; i < n; i++){
+			second.setCoefficient(degree2[i],coeff2[i]);
+		}
+		int choice = s.nextInt();
+		Polynomial result;
+		switch(choice){
+		// Add
+		case 1: 
+			 result = first.add(second);
+			result.print();
+			break;
+		// Subtract	
+		case 2 :
+			 result = first.subtract(second);
+			result.print();
+			break;
+		// Multiply
+		case 3 :
+			 result = first.multiply(second);
+			result.print();
+			break;
+		}
+
+	}
+  */
+
+
+public class Polynomial {
+	private int[] coefficient;
+
+	public Polynomial() {
+		this.coefficient = new int[10];
+	}
+
+	public void print() {
+		for (int i = 0; i < this.coefficient.length; i++) {
+			if (this.coefficient[i] != 0) {
+				if (i == 0) {
+					System.out.print(this.getCoefficient(i) + " ");
+				} else {
+					System.out.print(this.getCoefficient(i) + "x" + i + " ");
+				}
+			}
+		}
+		System.out.println();
+	}
+
+	private int getCoefficient(int index) {
+		if (index >= this.coefficient.length) {
+			return 0;
+		}
+		return this.coefficient[index];
+	}
+
+	public void setCoefficient(int degree, int coeff) {
+		if (degree >= this.coefficient.length) {
+			restructure(degree);
+		}
+		this.coefficient[degree] = coeff;
+	}
+
+	private void restructure(int degree) {
+		int[] temp = this.coefficient;
+		this.coefficient = new int[degree + 1];
+		for (int i = 0; i < temp.length; i++) {
+			this.setCoefficient(i, temp[i]);
+		}
+	}
+
+	public Polynomial add(Polynomial p) {
+		Polynomial ans = new Polynomial();
+
+		int len1 = this.coefficient.length;
+		int len2 = p.coefficient.length;
+
+		for (int i = 0; i < Math.max(len1, len2); i++) {
+			int sum = this.getCoefficient(i) + p.getCoefficient(i);
+			ans.setCoefficient(i, sum);
+		}
+
+		return ans;
+	}
+
+	public Polynomial subtract(Polynomial p) {
+		Polynomial ans = new Polynomial();
+
+		int len1 = this.coefficient.length;
+		int len2 = p.coefficient.length;
+
+		for (int i = 0; i < Math.max(len1, len2); i++) {
+			int difference = this.getCoefficient(i) - p.getCoefficient(i);
+			ans.setCoefficient(i, difference);
+		}
+
+		return ans;
+	}
+
+	public Polynomial multiply(Polynomial p) {
+		Polynomial ans = new Polynomial();
+		
+		for (int i = 0; i < this.coefficient.length; i++) {
+			for (int j = 0; j < p.coefficient.length; j++) {
+				int finalDegree = i + j;
+				int product = this.getCoefficient(i) * p.getCoefficient(j);
+				int oldCoefficient = ans.getCoefficient(finalDegree);
+				ans.setCoefficient(finalDegree, oldCoefficient + product);
+			}
+		}
+		
+		return ans;
+	}
+}
