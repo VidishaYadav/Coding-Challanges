@@ -1,0 +1,23 @@
+import java.lang.Math; 
+import java.util.Scanner;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		// Write your code here
+      long ans=0;
+      long i=0;
+      Scanner sc= new Scanner(System.in);
+      long s=sc.nextInt();
+      long r = 0;
+      while(s != 0)
+      {
+        r = s % 2;
+      	ans = ans + r*((long)(Math.pow(10,i)));
+        s = s/2;
+        i++;
+      }
+      System.out.print(ans);
+      
+	}
+}
