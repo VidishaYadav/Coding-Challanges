@@ -1,0 +1,29 @@
+public class solution {
+
+	public static void print(int n) {
+      int count = 0;
+      int sum1,sum2;
+     for(int i=1;i<=n;i++)
+     {
+       sum1 = count+1;
+       count = count + i;
+       
+       sum2 = count;
+       for(int j=1;j<=i;j++)
+       {
+         if(i%2 != 0)
+         {
+          System.out.print(sum1+" ");
+          sum1++;
+         }
+         else 
+         {
+           System.out.print(sum2+" ");
+           sum2--;
+         }
+       }
+        System.out.println();
+     }
+	}
+
+}
