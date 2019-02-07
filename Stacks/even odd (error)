@@ -1,0 +1,113 @@
+public class evenodd {
+    static final int n=10;
+    int top,top3,top2;
+    int a[]=new int[n];
+     int odd[]=new int[n];
+      int even[]=new int[n];
+    
+    void evenodd()
+    {
+        top=-1;
+        top2=-1;
+        top3=-1;
+    }
+    
+    int size()
+    {
+       return top+1; 
+    }
+     void push(int x)
+     {
+         if(top > n-2)
+             System.out.println("overflow ...first pop some element out");
+         else
+         {
+             a[++top]=x;
+             System.out.println("push completed");
+         }
+     }
+     
+      void push2(int x)
+     {
+             even[++top2]=x;
+             }
+      
+       void push3(int x)
+     {
+             odd[++top3]=x;
+         
+     }
+       
+       void print()
+       {
+           while(top2 >-1)
+           {
+           pop2();
+           }
+          while(top3 >-1)
+          {
+           pop3();
+           }
+          
+       }
+       
+      void pop2()
+      {
+           if(top2 < 0)
+             System.out.println("no element present in stack");
+         else
+         {
+             int  i = even[top2];
+             System.out.println(i);
+             top2--;
+      }
+      }
+       
+      
+       void pop3()
+      {
+           if(top3 < 0)
+             System.out.println("no element present in stack");
+         else
+         {
+             int  i = odd[top3];
+             System.out.println(i);
+             top3--;
+      }
+      }
+       
+     void pop()
+     {
+         if(top < 0)
+             System.out.println("no element present in stack");
+         else
+         {
+             int  i = a[top];
+             top--;
+             if(i%2 == 0)
+                 push2(i);
+             else 
+             {
+                 push3(i);
+             }
+             
+         }
+     }
+}
+
+     class stack
+     {
+         public static void main(String[] args) {
+             evenodd s = new evenodd();
+             s.push(3);
+             s.push(19);
+             s.push(30);
+             s.push(31);
+             s.push(32);
+             while(s.size() > 0)
+             {
+             s.pop();
+             }
+             s.print();
+}
+     }
