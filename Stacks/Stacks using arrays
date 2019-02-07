@@ -1,0 +1,47 @@
+public class stackusingarray {
+    static final int n=10;
+    int top;
+    int a[]=new int[n];
+    
+    boolean isEmpty()
+    {
+        return (top<1);
+    }
+    
+    void stackusingarray()
+    {
+        top=-1;
+    }
+     void push(int x)
+     {
+         if(top > n-2)
+             System.out.println("overflow ...first pop some element out");
+         else
+         {
+             a[++top]=x;
+             System.out.println("push completed");
+         }
+     }
+     void pop()
+     {
+         if(top < 0)
+             System.out.println("no element present in stack");
+         else
+         {
+             System.out.println(a[top]+" is popped");
+             top--;
+         }
+     }
+}
+     class stackmain
+     {
+         public static void main(String[] args) {
+             stackusingarray s = new stackusingarray();
+             s.push(3);
+             s.push(19);
+             s.pop();
+             System.out.println(s.isEmpty());
+             s.pop();
+              System.out.println(s.isEmpty());
+         }
+     }
