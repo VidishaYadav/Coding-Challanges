@@ -1,0 +1,51 @@
+/*************** 
+ * Following is the Node class already written 
+class LinkedListNode<T> {
+	T data;
+	LinkedListNode<T> next;
+
+	public Node(T data) {
+		this.data = data;
+	}
+}
+ ***************/
+
+public class Solution {
+	public static int indexOfNIter(LinkedListNode<Integer> head, int n) {
+		
+      if(head == null)
+        return -1;
+      int count =0;
+      while(head.next != null && head.data != n)
+      {
+        head=head.next;
+        count ++;
+      }
+      if(head.data == n)
+        return count;
+      else return -1;
+    }
+}
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
