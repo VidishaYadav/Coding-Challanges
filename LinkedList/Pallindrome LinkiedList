@@ -1,0 +1,76 @@
+
+/*
+class LinkedListNode<T> {
+	public T data;
+	public LinkedListNode<T> next;
+
+	public LinkedListNode(T data) {
+		this.setData(data);
+		this.next = null;
+	}
+
+	public T getData() {
+		return data;
+	}
+
+	public void setData(T data) {
+		this.data = data;
+	}
+
+}
+* */
+public class Solution {
+	public static boolean isPalindrome_2(LinkedListNode<Integer> head) {
+      LinkedListNode<Integer> head1=head;
+      LinkedListNode<Integer> head2=head;
+       LinkedListNode<Integer> head3=head;
+      int temp=0;
+      while(head1 != null){
+        head1=head1.next;
+        temp++;
+      }
+      if(temp %2 == 0 ){
+        for(int i=0;i<((temp)/2)-1;i++){
+          head3=head3.next;
+        }
+        head2=head3.next;
+        head3.next=null;
+      }
+      
+      else {
+        for(int i=0;i<((temp)/2)-1;i++){
+          head3=head3.next;
+        }
+        head2=head3.next.next;
+        head3.next=null;
+      }
+      head2 = reverse_R(head2);
+        
+      for(int i=0;i<temp/2;){
+        if(head2.data != head.data )
+          return false;
+        else 
+          head2=head2.next;
+        head=head.next;
+        i++;
+      }
+      return true;
+    
+      }
+      
+      
+
+public static LinkedListNode<Integer> reverse_R(LinkedListNode<Integer> root) {
+		if(root ==null || root.next ==null)
+          return root;
+      LinkedListNode<Integer> finalHead = reverse_R(root.next);
+		LinkedListNode<Integer> temp = finalHead;
+		while(temp.next != null){
+			temp = temp.next;
+		}
+		temp.next = root;
+		root.next = null;
+		return finalHead;
+	}
+    }
+
