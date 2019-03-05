@@ -19,7 +19,7 @@ public class solution {
     static void merge(int[] input, int si,int ei)
     {
       int mid = (si + ei)/2;
-      int ans[]= new int[ei - ei +1];
+      int ans[]= new int[si - ei +1];
       int i=si;
       int j=mid+1;
       int k=0;
