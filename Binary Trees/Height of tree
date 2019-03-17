@@ -1,0 +1,38 @@
+public class Solution {
+
+/*	Binary Tree Node class
+ * 
+ * class BinaryTreeNode<T> {
+		T data;
+		BinaryTreeNode<T> left;
+		BinaryTreeNode<T> right;
+		
+		public BinaryTreeNode(T data) {
+			this.data = data;
+		}
+	}
+	*/
+	public static int height(BinaryTreeNode<Integer> root) {
+		/* Your class should be named Solution
+		* Don't write main().
+		* Don't read input, it is passed as function argument.
+		* Return output and don't print it.
+		* Taking input and printing output is handled automatically.
+		*/
+		return Height(root,1);
+	}
+	static int max = 0;
+    public static int Height(BinaryTreeNode<Integer> root,int h)
+    {
+        if(root == null)
+            return 0;
+        
+        if(h > max)
+            max= h;
+        
+        Height(root.left,h+1);
+        Height(root.right,h+1);
+        
+        return max;
+    }
+}
