@@ -1,0 +1,20 @@
+import java.util.HashMap;
+public class solution {
+
+	public static String uniqueChar(String str){
+	HashMap<Integer,Character> seen=new HashMap<>();
+    for(int i=0;i<str.length();i++)
+    {
+      if(!seen.containsValue(str.charAt(i))){
+        seen.put(i,str.charAt(i));
+      }
+    }
+     String returnStr = "";
+     for(int i=0;i<str.length();i++){
+       if(seen.containsKey(i)){
+         returnStr = returnStr + str.charAt(i);
+       }
+     }
+	return returnStr;
+    }
+}
