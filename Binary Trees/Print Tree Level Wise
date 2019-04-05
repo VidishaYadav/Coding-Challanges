@@ -1,0 +1,71 @@
+import java.util.LinkedList;
+public class Solution {
+
+/*	Binary Tree Node class
+ * 
+ * class BinaryTreeNode<T> {
+		T data;
+		BinaryTreeNode<T> left;
+		BinaryTreeNode<T> right;import java.util.LinkedList;
+public class Solution {
+
+/*	TreeNode structure 
+ * 
+ * class TreeNode<T> {
+		T data;
+		ArrayList<TreeNode<T>> children;
+
+		TreeNode(T data){
+			this.data = data;
+			children = new ArrayList<TreeNode<T>>();
+		}
+	}*/
+	
+	
+	
+	public static void printLevelWise(BinaryTreeNode<Integer> root){
+		/* Your class should be named Solution 
+ 		 * Don't write main(). 
+		 * Don't read input, it is passed as function argument. 
+		 * Print output and don't return it. 
+		 * Taking input is handled automatically. 
+		 */
+      LinkedList<BinaryTreeNode<Integer>> queue=new LinkedList<>();
+  queue.addLast(root);
+  queue.addLast(null);
+  while(!queue.isEmpty()){
+    BinaryTreeNode<Integer> node=queue.removeFirst();
+    if(node==null)
+    {
+      if(queue.isEmpty())
+        return;
+      else
+      {
+        queue.addLast(null);
+        
+      }
+    }
+
+    else
+      {
+      if(node.left!=null && node.right!=null){
+        System.out.println(node.data+":L:"+node.left.data+",R:"+node.right.data);
+          queue.addLast(node.left);
+          queue.addLast(node.right);
+      }else if (node.left!=null && node.right==null){
+        System.out.println(node.data+":L:"+node.left.data+",R:"+"-1");
+          queue.addLast(node.left);
+      }else if(node.left==null && node.right!=null){
+        System.out.println(node.data+":L:"+"-1"+",R:"+node.right.data);
+          queue.addLast(node.right);
+    }
+      else{
+         System.out.println(node.data+":L:"+"-1"+",R:"+"-1");
+      }
+    }
+  }
+  }
+}
+
+		
+		
