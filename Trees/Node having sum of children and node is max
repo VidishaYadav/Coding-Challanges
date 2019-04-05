@@ -1,0 +1,43 @@
+public class Solution {
+
+/*	TreeNode structure 
+ * 
+ * class TreeNode<T> {
+		T data;
+		ArrayList<TreeNode<T>> children;
+
+		TreeNode(T data){
+			this.data = data;
+			children = new ArrayList<TreeNode<T>>();
+		}
+	}*/
+	
+	
+	  public static TreeNode<Integer> maxSumNode(TreeNode<Integer> root){
+		// Write your code here
+      TreeNode<Integer> node=root;
+      int sum1=root.data;
+      for(int i=0;i<root.children.size();i++)
+      {
+        sum1+=root.children.get(i).data;
+      }
+     
+       for(int i=0;i<root.children.size();i++)
+      {
+        TreeNode<Integer> temp=maxSumNode(root.children.get(i));
+         int sum2=temp.data;
+          for(int j=0;j<temp.children.size();j++)
+      	{
+     	   sum2+=temp.children.get(j).data;
+      	}
+        if(sum2>sum1)
+        { 
+          node = temp;  
+          sum1=sum2;
+      }
+       }
+      return node;
+	}
+	
+		
+}
