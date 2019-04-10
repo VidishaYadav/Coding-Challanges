@@ -1,0 +1,78 @@
+import java.util.ArrayList;
+import java.util.LinkedList;
+
+
+public class Solution {
+
+	/*	Binary Tree Node class
+	 * 
+	 * class BinaryTreeNode<T> {
+		T data;
+		BinaryTreeNode<T> left;
+		BinaryTreeNode<T> right;
+
+		public BinaryTreeNode(T data) {
+			this.data = data;
+		}
+	}
+	 */
+
+	/* class Node<T> {
+		T data;
+		Node<T> next;
+		Node(T data){
+			this.data = data;
+		}
+	}
+*/
+	public static ArrayList<Node<BinaryTreeNode<Integer>>> LLForEachLevel(BinaryTreeNode<Integer> root) {
+		
+		// Write your code here
+        if(root == null)
+            return null;
+    LinkedList<BinaryTreeNode<Integer>> primary = new LinkedList<>();
+    LinkedList<BinaryTreeNode<Integer>> secondary = new LinkedList<>();
+        ArrayList<Node<BinaryTreeNode<Integer>>> output=new ArrayList<>();
+        Node<BinaryTreeNode<Integer>> head=null;
+        Node<BinaryTreeNode<Integer>> tail=null;
+        Node<BinaryTreeNode<Integer>> newNode; 
+        primary.addLast(root);
+        //queue.addLast(null);
+        while(!primary.isEmpty())
+        {
+           BinaryTreeNode<Integer> currentNode = primary.removeFirst();
+            newNode = new Node<BinaryTreeNode<Integer>>(currentNode);
+            
+            if(head == null) 
+            {
+                head=newNode;
+                tail=newNode;
+            }
+            else
+            {
+                tail.next=newNode;
+                tail=newNode;
+            }
+           if(currentNode.left!= null)
+           {
+               secondary.addLast(currentNode.left);
+           }
+            if(currentNode.right != null)
+            {
+                secondary.addLast(currentNode.right);
+            }
+            if(primary.isEmpty())
+            {
+                output.add(head);
+                head=null;
+                tail=null;
+               LinkedList<BinaryTreeNode<Integer>> temp = primary;
+                primary=secondary;
+                secondary=temp;
+            }
+        }
+        return output;
+	}
+
+
+}
