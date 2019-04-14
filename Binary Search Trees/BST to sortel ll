@@ -1,0 +1,49 @@
+public class Solution {
+
+/*	Binary Tree Node class 
+ * 
+ * 	class BinaryTreeNode<T> {
+		T data;
+		BinaryTreeNode<T> left;
+		BinaryTreeNode<T> right;
+		
+		public BinaryTreeNode(T data) {
+			this.data = data;
+		}
+	}
+	*/
+
+/* LinkedList Node Class
+*
+*	
+class LinkedListNode<T> {
+	T data;
+	LinkedListNode<T> next;
+	
+	public LinkedListNode(T data) {
+		this.data = data;
+	}
+}
+*/
+
+	public static LinkedListNode<Integer> BSTToSortedLL(BinaryTreeNode<Integer> root){
+        
+        if(root == null)
+            return null;
+        
+        LinkedListNode<Integer> leftHeadNode=BSTToSortedLL(root.left);
+        LinkedListNode<Integer> rootNode = new LinkedListNode<>(root.data);
+        LinkedListNode<Integer> rightHeadNode= BSTToSortedLL(root.right);
+        rootNode.next=rightHeadNode;
+        if(leftHeadNode == null)
+            return rootNode;
+        
+        LinkedListNode<Integer> leftTailNode = leftHeadNode;
+        while(leftTailNode.next != null)
+        {
+            leftTailNode=leftTailNode.next;
+        }
+        leftTailNode.next=rootNode;
+        return leftHeadNode;
+    }
+}	
