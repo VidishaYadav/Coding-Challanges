@@ -1,0 +1,31 @@
+import java.util.*;
+public class Solution {
+    
+	public static int minCostPath(int input[][]) {
+		/* Your class should be named Solution
+		* Don't write main().
+		* Don't read input, it is passed as function argument.
+		* Return output and don't print it.
+		* Taking input and printing output is handled automatically.
+		*/
+		return minCostPath1( input,0,0);
+        
+	}
+    
+    public static int minCostPath1(int input[][] ,int i ,int j)
+    {
+        if(i == input.length-1 && j == input[0].length-1)
+            return input[i][j];
+      
+        if(i > input.length-1  || j > input[0].length-1){
+            return Integer.MAX_VALUE;
+        }
+        
+           int op3 = minCostPath1(input,i+1,j+1);
+            int op4 = minCostPath1(input,i,j+1);
+            int op5 = minCostPath1(input,i+1,j);
+        
+            int count = Math.min(op3,Math.min(op4,op5));
+        return count + input[i][j];
+    }
+}
