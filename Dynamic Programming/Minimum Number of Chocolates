@@ -1,0 +1,34 @@
+
+public class Solution {
+
+	public static int getMin(int arr[], int N){
+        /* Your class should be named Solution
+		 * Don't write main().
+		 * Don't read input, it is passed as function argument.
+		 * Return output.
+	 	 * Taking input is handled automatically.
+		 */
+        int out[]= new int[N+1];
+        out[0]=1;
+        for(int i=1;i<N;i++)
+        {
+            if(arr[i]>arr[i-1])
+                out[i]=out[i-1]+1;
+            else
+                out[i]=1;
+        }
+        for(int i=N-2;i>=0;i--)
+        {
+            if(arr[i]>arr[i+1] && out[i]<=out[i+1])
+            {
+                out[i]=out[i+1]+1;
+            }
+        }
+        int sum=0;
+        for(int i=0;i<N+1;i++)
+        {
+            sum = sum+out[i];
+        }
+        return sum;
+  }
+}
