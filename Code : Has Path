@@ -1,0 +1,59 @@
+import java.util.Scanner;
+import java.util.*;
+
+public class Solution {
+
+    public static Boolean getpath(HashMap<Integer,Boolean> visited ,int v1,int v2,HashMap<Integer,ArrayList<Integer>> adjacencylist)
+    {
+        visited.put(v1,true);
+        ArrayList<Integer> in = adjacencylist.get(v1);
+        for(int i=0;i<in.size();i++)
+        {
+            if(in.get(i) == v2)
+                return true;
+        }
+        for(int i=0;i<in.size();i++)
+        {
+            if(!visited.get(in.get(i)))
+            {
+             boolean ans = getpath(visited,in.get(i),v2,adjacencylist);
+        if (ans == true)
+            return true;
+    }
+        }
+        return false;
+}
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		int v = s.nextInt();
+		int e = s.nextInt();
+
+		/* Write Your Code Here
+		 * Complete the Rest of the Program
+		 * You have to take input and print the output yourself
+		 */
+        HashMap<Integer,ArrayList<Integer>> adjacencylist = new HashMap<>();
+        for(int i=0;i<v;i++)
+        {
+            ArrayList<Integer> arr = new ArrayList<>();
+            adjacencylist.put(i,arr);
+        }
+        for(int i=0;i<e;i++)
+        {
+            int source = s.nextInt();
+            int des= s.nextInt();
+            adjacencylist.get(source).add(des);
+            adjacencylist.get(des).add(source);
+        }
+        int v1=s.nextInt();
+        int v2=s.nextInt();
+        
+        HashMap<Integer,Boolean> visited = new HashMap<>();
+        for(int i=0;i<v;i++)
+        {
+            visited.put(i,false);
+        }
+        boolean b = getpath(visited,v1,v2,adjacencylist);
+        System.out.println(b);
+	}
+    }
