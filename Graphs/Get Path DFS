@@ -1,0 +1,67 @@
+import java.util.Scanner;
+import java.util.*;
+
+public class Solution {
+
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		int v = s.nextInt();
+		int e = s.nextInt();
+
+        int edges[][] = new int[v][v];
+        for(int i=0;i<v;i++)
+        {
+            for(int j=0;j<v;j++)
+            {
+                edges[i][j]=0;        
+            }
+        }
+        for(int i=0;i<e;i++)
+        {
+                int v1=s.nextInt();
+                int v2=s.nextInt();
+                edges[v1][v2]=1;
+                edges[v2][v1]=1;
+        }
+        int v1=s.nextInt();
+        int v2=s.nextInt();
+        boolean visited[] = new boolean[v];
+         for(int i=0;i<v;i++)
+        {
+           visited[i]=false;
+        }
+       ArrayList<Integer> ans = getpath(edges,v,v1,v2,visited);
+        for(int i=0;i<ans.size();i++)
+        {
+            System.out.print(ans.get(i)+" ");
+        }
+        
+	}
+    
+   static ArrayList<Integer> getpath(int[][] edges,int v,int v1,int v2,boolean visited[])
+    {
+       ArrayList<Integer> a = new ArrayList<>();
+       visited[v1]=true;
+        if(v1 == v2)
+        {
+           
+            // ArrayList<Integer> a = new ArrayList<>();
+            a.add(v1);
+            return a;
+        }
+       for(int i=0;i<v;i++)
+       {
+           if(visited[i] == false && edges[v1][i] == 1)
+           {
+               ArrayList<Integer> o = getpath(edges,v,i,v2,visited);
+             if(o.size()>0)
+             {
+                 o.add(v1);
+                 return o;
+             }
+           }
+       }
+       return a;
+    }
+    
+}
