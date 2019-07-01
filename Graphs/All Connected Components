@@ -1,0 +1,75 @@
+import java.util.Scanner;
+import java.util.*;
+
+public class Solution {
+
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		int v = s.nextInt();
+		int e = s.nextInt();
+         HashMap<Integer,ArrayList<Integer>> adjacencylist = new HashMap<>();
+        for(int i=0;i<v;i++)
+        {
+            ArrayList<Integer> a = new ArrayList<>();
+            adjacencylist.put(i,a);
+        }
+        for(int i=0;i<e;i++)
+        {
+            int source = s.nextInt();
+            int des = s.nextInt();
+            adjacencylist.get(source).add(des);
+            adjacencylist.get(des).add(source);
+        }
+        boolean visited[] = new boolean[v];
+        for(int i=0;i<visited.length;i++)
+            visited[i] = false; 
+       ArrayList<ArrayList<Integer>> ans=isConnected(adjacencylist,visited);
+        // System.out.print(ans.size());
+       for(int i=0;i<ans.size();i++)
+       {
+            Collections.sort(ans.get(i));
+           for(int j=0;j<ans.get(i).size();j++)
+           {
+               System.out.print(ans.get(i).get(j)+" ");
+           }
+            System.out.println();
+       }
+	}
+    
+    
+    static ArrayList<ArrayList<Integer>> isConnected(HashMap<Integer,ArrayList<Integer>> adjacencylist,boolean visited[])
+    {
+        ArrayList<ArrayList<Integer>> a = new ArrayList<>();
+       for(int i=0;i<visited.length;i++)
+       {
+           if(visited[i] == false)
+           {
+               visited[i] = true;
+               ArrayList<Integer> conn = new ArrayList<>();
+               conn = helper(adjacencylist,i,visited);
+               conn.add(i);
+               a.add(conn);
+           }
+       }
+        return a;
+    }
+    
+    static ArrayList<Integer> helper(HashMap<Integer,ArrayList<Integer>> adjacencylist,int sv,boolean visited[])
+    {
+        visited[sv]=true;
+        ArrayList<Integer> temp = adjacencylist.get(sv);
+        ArrayList<Integer> ans=new ArrayList<>();
+        for(int i=0;i<temp.size();i++)
+        {
+        int start = temp.get(i);
+        if(visited[start] == false)
+        {
+             ArrayList<Integer> conn=helper(adjacencylist,start,visited);
+             conn.add(start);
+            for(int j=0;j<conn.size();j++)
+            ans.add(conn.get(j));
+        }
+        }
+        return ans;
+        }
+}
