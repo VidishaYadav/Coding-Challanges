@@ -1,0 +1,50 @@
+public class solution {
+    
+    public int solve(int n,int m,int U[],int V[]) {
+        //write your code here
+        int edges[][] = new int[n][n];
+        for(int i =0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+               edges[i][j]= 0; 
+            }
+        }
+        for(int i=0;i<m;i++)
+        {
+            int x=U[i];
+            int y=V[i];
+            edges[x-1][y-1] = 1;
+            edges[y-1][x-1] = 1;
+        }
+        boolean visited[] = new boolean[n];
+        for(int i =0;i<n;i++)
+        {
+            visited[i]=false;
+        }
+        //visited[0]=true;
+        int count =0;
+        for(int i=0;i<visited.length;i++)
+        {
+            if(visited[i] == false)
+            {
+                islands(edges,visited,i);  
+                count++;
+            }
+        }
+        
+        return count;
+    }
+    
+    static void islands(int edges[][],boolean visited[],int sv)
+    {
+        visited[sv]=true;
+            for(int i=0;i<visited.length;i++)
+            {
+                  if(visited[i] == false && edges[sv][i] == 1)
+                  {
+                       islands(edges,visited,i);
+                  }
+            }
+        }
+}
