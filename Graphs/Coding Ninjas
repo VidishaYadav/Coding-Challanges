@@ -1,0 +1,66 @@
+
+public class solution {
+	
+	int solve(String[] Graph , int N, int M)
+	{
+        int[][] dir = {{-1,-1},{-1,0},{-1,1},{0,-1},{0,1},{1,0},{1,-1},{1,1}};
+        String pattern = "ODINGNINJA";
+        boolean visited[][] = new boolean[N][M];
+        for(int i=0;i<N;i++)
+        {
+            for(int j=0;j<M;j++)
+            {
+                visited[i][j] = false;
+            }
+        }
+        for(int i=0;i<N;i++)
+        {
+            for(int j=0;j<M;j++)
+            {
+                if(Graph[i].charAt(j) == 'C')
+                {
+                   boolean ans = helper(Graph,pattern,dir,i,j,N,M,visited);
+                    if(ans == true)
+                    return 1;
+                    else
+                    {
+                       for(int a=0;a<N;a++)
+                        {
+                            for(int b=0;b<M;b++)
+                            {
+                                visited[a][b] = false;
+                            }
+                        } 
+                    }
+                }
+            }
+        }
+        return 0;
+	}
+    boolean helper(String Graph[],String word,int dir[][],int i,int j,int r,int c,boolean visited[][])
+    {
+        visited[i][j]=true;
+        if(word.length() == 0)
+            return true;
+        
+        boolean ans = false;
+        for(int k=0;k<8;k++)
+        {
+            int ni=i+dir[k][0];
+            int nj=j+dir[k][1];
+            
+            if((isvalid(ni,nj,r,c)==true) && (visited[ni][nj]==false) && (Graph[ni].charAt(nj)==word.charAt(0)))
+            {
+                // System.out.println(i+""+j);
+                ans=ans| helper(Graph,word.substring(1),dir,ni,nj,r,c,visited);
+            }
+        }
+         return ans;
+    }
+    boolean isvalid(int i,int j,int n,int m)
+    {
+        if(i<0 || i>=n || j<0 || j>=m)
+            return false;
+        return true;
+    }
+}
